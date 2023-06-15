@@ -35,11 +35,13 @@ machineOn = True
 
 
 def check_resources(chosen_drink):
+    """Returns True when order can be made, False when ingredients are not sufficient"""
     for key, value in MENU[chosen_drink]["ingredients"].items():
         if value > resources[key]:
-            return f"Sorry, there is not enough {key}."
+            print(f"Sorry, there is not enough {key}.")
+            return False
         else:
-            return "ok"
+            return True
 
 
 while machineOn:
@@ -57,8 +59,7 @@ while machineOn:
         print(f'Money: ${resources["money"]}')
 
     else:
-        response = check_resources(userInput)
-        if response == "ok":
+        if check_resources(userInput):
             print('Now insert the coins!')
             quarters_in = int(input('Quarters inserted: '))
             dimes_in = int(input('Dimes inserted: '))
@@ -73,8 +74,6 @@ while machineOn:
                     print(ingredient)
                     resources[ingredient] -= quantity
                 if total_in > MENU[userInput]["cost"]:
-                    print(f"Here is ${total_in - MENU[userInput]['cost']} dollars in change.")
+                    change = round(total_in - MENU[userInput]['cost'], 2)
+                    print(f"Here is ${change} dollars in change.")
                 print(f'Here is your {userInput}. Enjoy!')
-
-        else:
-            print(response)
