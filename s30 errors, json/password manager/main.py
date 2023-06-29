@@ -85,12 +85,15 @@ def find_password():
     except FileNotFoundError:
         messagebox.showinfo(title='Oops!', message='You still have no information stored.')
     else:
-        try:
-            result = data[search_term]
-        except KeyError:
-            messagebox.showinfo(title='Oops!', message='Website not found.')
+        if not search_term:
+            pass
         else:
-            messagebox.showinfo(title=search_term, message=f"E-mail/Username: {result['email']}\nPassword: {result['password']}")
+            try:
+                result = data[search_term]
+            except KeyError:
+                messagebox.showinfo(title='Oops!', message='Website not found.')
+            else:
+                messagebox.showinfo(title=search_term, message=f"E-mail/Username: {result['email']}\nPassword: {result['password']}")
 
 
 
