@@ -81,5 +81,5 @@ put_config = {
 response = requests.delete(url=put_endpoint, headers=put_headers)
 # print(response.text)
 
-
+# https://pixe.la/v1/users/jaguat/graphs/b2d-xyz.html
 
